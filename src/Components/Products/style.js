@@ -2,15 +2,17 @@ import styled from "styled-components";
 
 const ProductsStyle = styled.article`
     display: grid;
-    grid-template-rows: 40% 30% 30%;
+    grid-template-rows: 40% 30% 15% 15%;
     grid-template-columns: 20% 1fr;
     grid-template-areas: 
     "header header"
     "side main"
-    "side footer";
+    "side footer"
+    "button button"
+    ;
     background-color: aliceblue;
     width: 45%;
-    margin: 0 5px 10px 5px;
+    margin: 10px 10px 0 10px;
 
     img:first-of-type {
         width: 100%;
@@ -18,7 +20,7 @@ const ProductsStyle = styled.article`
     }
 
     img:last-of-type {
-        margin-top: 10px;
+        margin-top: 12.5px;
         justify-self: center;
         width: 20px;
         grid-area: side;
@@ -35,6 +37,11 @@ const ProductsStyle = styled.article`
         margin: 0 0 10px 0;
         grid-area: footer;
         font-size: 1rem;
+    }
+
+    button {
+        height: 30px;
+        grid-area: button;
     }
 `
 
