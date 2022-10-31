@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
 body {
     min-height: 100vh;
-  background-color: rebeccapurple;
+    background-color: rebeccapurple;
 }
 
 footer {
@@ -17,6 +17,10 @@ footer {
     bottom: 0;
     background-color: grey;
     text-align: center;
+}
+
+.teste {
+  display: flex;
 }
 
 @media screen and (max-width: 412px) {
