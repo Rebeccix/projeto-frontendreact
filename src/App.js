@@ -14,11 +14,20 @@ function App() {
   const [ cart, setCart ] = useState([])
 
   const addItem = (current) => {
-    console.log(cart.length)
-    if (cart.length === 0 ) {
-      setCart([current])
+    const filtered = cart.filter(item => item.name !== current.name)
+    // const mapa = cart.map((i) => i.includes(current))
+    const duplicat = cart.find((i) => i.name === current.name)
+    // console.log(duplicat.amount++)
+    if (cart.length === 0) {
+      setCart([{...current, amount: 1}])
+    } else if (duplicat) {
+      setCart(
+        cart.map(item => 
+          item.name === current.name ? {...current, amount: duplicat.amount + 1} : item
+        )
+      )
     } else {
-      cart.map(() => setCart([...cart, current]))
+      cart.map(() => setCart([...cart, {...current, amount: current.amount + 1}]))
     }
   }
 

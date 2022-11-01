@@ -7,7 +7,7 @@ export default function Main(props) {
     return( 
         <MainStyle>
             {items.map((i) => (
-          <CardItem name={i.name} price={i.preco} image={i.image} addItem={addItem}></CardItem>
+          <CardItem name={i.name} price={i.preco} image={i.image} amount={i.amount} addItem={addItem}></CardItem>
             ))}
         </MainStyle>
     )
