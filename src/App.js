@@ -12,6 +12,8 @@ function App() {
   const [cart, setCart] = useState([]);
   const [totalCart, setTotalCart] = useState([]);
   const [filteredItems, setFilteredItems] = useState(items)
+  const [min, setMin] = useState(0)
+  const [max, setMax] = useState(0)
 
   const addItem = (current) => {
     // const filtered = cart.filter(item => item.name !== current.name)
@@ -63,38 +65,33 @@ function App() {
   };
 
   const onChangeMin = (current) => {
-    const maped = items.filter(i => i.preco >= current.target.value)
-    if (maped.length === 0) {
-      setFilteredItems(items)
-    } else {
-      setFilteredItems(maped)
-    }
+    const filtered = items.filter(i => i.preco >= current.target.value)
+    setFilteredItems(filtered)
+    setMin(+current.target.value)
   }
 
   const onChangeMax = (current) => {
-    const maped = items.filter(i => i.preco <= current.target.value)
-    if (maped.length === 0) {
-      setFilteredItems(items)
-    } else {
-      setFilteredItems(maped)
-    }
+    const filtered = items.filter(i => i.preco <= current.target.value)
+    setFilteredItems(filtered)
+    setMax(+current.target.value)
   }
-
+  
   const onChangeMame = (current) => {
-    const mapedName = items.filter(i => i.name === current.target.value)
-    if (mapedName.length === 0) {
-      setFilteredItems(items)
-    } else {
-      setFilteredItems(mapedName)
-    }
+    const filtered = items.filter(i => i.name === current.target.value)
+    setFilteredItems(filtered)
   }
 
+  const filterValues = () => {
+    const filtered = items.filter(i => i.preco >= min && i.preco <= max)
+    setFilteredItems(filtered)
+  }
+  
   return (
     <>
       <GlobalStyle />
       <Header />
       <div className="teste">
-        <Filter onChangeMin={onChangeMin} onChangeMax={onChangeMax} onChangeMame={onChangeMame}/>
+      <Filter filterValues={filterValues} onChangeMame={onChangeMame} onChangeMin={onChangeMin} onChangeMax={onChangeMax}/>
         <Main filteredItems={filteredItems} addItem={addItem} />
         <Cart cart={cart} removeItem={removeItem} totalCart={totalCart} />
       </div>

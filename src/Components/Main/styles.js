@@ -5,4 +5,11 @@ export const MainStyle = styled.div`
     background-color: aquamarine;
     display: flex;
     flex: 4;
+
+    .empty {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 `

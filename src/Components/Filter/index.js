@@ -2,7 +2,7 @@ import React from "react";
 import { FilterStyle } from "./styles";
 
 export default function Filter(props) {
-  const { onChangeMin, onChangeMax, onChangeMame } = props
+  const { onChangeMin, onChangeMax, onChangeMame, filterValues } = props
   return (
     <FilterStyle>
       <p>Filter</p>
@@ -16,6 +16,7 @@ export default function Filter(props) {
         <label >nome:
           <input type="text" onChange={onChangeMame}/>
         </label>
+        <button onClick={filterValues}>Filtrar</button>
       </div>
     </FilterStyle>
   );
