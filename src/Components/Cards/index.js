@@ -2,7 +2,7 @@ import React from "react";
 import { CardStyle } from "./styles";
 
 export default function Cart(props) {
-  const { cart, removeItem } = props;
+  const { cart, removeItem, totalCart} = props;
   return (
     <CardStyle>
       <p>Carrinho</p>
@@ -15,6 +15,7 @@ export default function Cart(props) {
             <button onClick={() => removeItem(i)}> remove </button>
           </div>
         ))}
+        <p>Total: {totalCart}</p>
     </CardStyle>
   );
 }
