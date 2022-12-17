@@ -7,11 +7,6 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
-body {
-    min-height: 100vh;
-    background-color: rebeccapurple;
-}
-
 footer {
     position: relative;
     bottom: 0;
@@ -19,14 +14,17 @@ footer {
     text-align: center;
 }
 
-.teste {
+.center {
   display: flex;
+  flex-direction: column;
 }
 
-@media screen and (max-width: 412px) {
-  body {
-    background-color: lightgreen;
-  }
+@media screen and (min-width: 412px) {
+  .center {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
 }
 `;
 

@@ -4,16 +4,26 @@ import Main from "./Components/Main";
 import Filter from "./Components/Filter";
 import GlobalStyle from "./GlobalStyle";
 import dataBase from "./dataBase";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const { items } = dataBase;
-
-  const [cart, setCart] = useState([]);
-  const [totalCart, setTotalCart] = useState([]);
-  const [filteredItems, setFilteredItems] = useState(items)
-  const [min, setMin] = useState(0)
-  const [max, setMax] = useState(0)
+  
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || [])
+  const [totalCart, setTotalCart] = useState(JSON.parse(localStorage.getItem("total")) || []);
+  const [items, setItems] = useState(dataBase)
+  const [filterMin, setFilterMin] = useState(0)
+  const [filterMax, setFilterMax] = useState(0)
+  const [filterName, setFilterName] = useState('')
+  const [toggle, setToggle] = useState(1)
+  const [toggleCart, setToggleCart] = useState(1)
+  const [sortItemsName, setSortItemsName] = useState(0)
+  
+  useEffect(() => {
+      localStorage.setItem('cart', JSON.stringify(cart))
+      localStorage.setItem('total', JSON.stringify(totalCart))
+  } 
+  , [totalCart]
+  )
 
   const addItem = (current) => {
     // const filtered = cart.filter(item => item.name !== current.name)
@@ -41,6 +51,7 @@ function App() {
     } else {
       setTotalCart(totalCart + current.price);
     }
+    setToggleCart(0)
   };
 
   const removeItem = (current) => {
@@ -64,36 +75,28 @@ function App() {
     setTotalCart(totalCart - current.price);
   };
 
-  const onChangeMin = (current) => {
-    const filtered = items.filter(i => i.preco >= current.target.value)
-    setFilteredItems(filtered)
-    setMin(+current.target.value)
+  const removeTodosItems = () => {
+    setCart([])
+    setTotalCart('')
+    setToggleCart(1)
   }
 
-  const onChangeMax = (current) => {
-    const filtered = items.filter(i => i.preco <= current.target.value)
-    setFilteredItems(filtered)
-    setMax(+current.target.value)
-  }
-  
-  const onChangeMame = (current) => {
-    const filtered = items.filter(i => i.name === current.target.value)
-    setFilteredItems(filtered)
+  const hideShow = () => {
+    toggle === 0 ? setToggle(1) : setToggle(0)
   }
 
-  const filterValues = () => {
-    const filtered = items.filter(i => i.preco >= min && i.preco <= max)
-    setFilteredItems(filtered)
+  const hideShowCart = () => {
+    toggleCart === 0 ? setToggleCart(1) : setToggleCart(0)
   }
-  
+
   return (
     <>
       <GlobalStyle />
-      <Header />
-      <div className="teste">
-      <Filter filterValues={filterValues} onChangeMame={onChangeMame} onChangeMin={onChangeMin} onChangeMax={onChangeMax}/>
-        <Main filteredItems={filteredItems} addItem={addItem} />
-        <Cart cart={cart} removeItem={removeItem} totalCart={totalCart} />
+      <Header  hideShowCart={hideShowCart} hideShow={hideShow}/>
+      <div className="center">
+      <Filter setSortItemsName={setSortItemsName} toggle={toggle} setFilterMin={setFilterMin} setFilterMax={setFilterMax} setFilterName={setFilterName}/>
+      <Cart toggleCart={toggleCart} removeTodosItems={removeTodosItems} cart={cart} removeItem={removeItem} totalCart={totalCart} />
+      <Main sortItemsName={sortItemsName} filterMin={filterMin} filterMax={filterMax} filterName={filterName} items={items} addItem={addItem} />
       </div>
     </>
   );

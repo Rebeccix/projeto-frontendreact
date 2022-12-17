@@ -1,10 +1,16 @@
 import styled from "styled-components";
 
 export const CardStyle = styled.div`
+    width: ${props => props.toggleCart ? "0" : "300px"};
+    padding-top: 110px;
+    transition: width 1s;
     background-color: bisque;
-    flex: 1;
 
-    div > div {
+    div {
+        padding: 0 10px;
+    }
+
+    div > div > div {
         display: flex;
         justify-content: space-between;
     }
@@ -18,5 +24,13 @@ export const CardStyle = styled.div`
     .full {
         display: flex;
         justify-content: space-between;
+    }
+
+    p {
+        margin: 10px 0;
+    }
+    
+    @media screen and (min-width: 412px) {
+        order: 1;
     }
 `

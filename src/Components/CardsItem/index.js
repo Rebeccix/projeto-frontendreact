@@ -6,11 +6,11 @@ export default function CardItem(props) {
   return (
     <CardItemStyle>
       <div>
-        <img src={image} alt="" onClick={() => addItem(props)}/>
+          <img src={image} alt="" onClick={() => addItem(props)}/>
         <h1>{name}</h1> 
-        <p>{price}</p>
+        <p>R$ {price}</p>
       </div>
-      <button onClick={() => addItem(props)}> Add Carrinho</button>
+      <button onClick={() => addItem(props)}>Add Carrinho</button>
     </CardItemStyle>
   );
 }
